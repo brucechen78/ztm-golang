@@ -1,0 +1,90 @@
+//--Summary:
+//  Create a program to manage lending of library books.
+//
+//--Requirements:
+//* The library must have books and members, and must include:
+//  - Which books have been checked out
+//  - What time the books were checked out
+//  - What time the books were returned
+//* Perform the following:
+//  - Add at least 4 books and at least 3 members to the library
+//  - Check out a book
+//  - Check in a book
+//  - Print out initial library information, and after each change
+//* There must only ever be one copy of the library in memory at any time
+//
+//--Notes:
+//* Use the `time` package from the standard library for check in/out times
+//* Liberal use of type aliases, structs, and maps will help organize this project
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type Book struct {
+	name         string
+	checkoutTime string
+	returnTime   string
+}
+
+type Member struct {
+	name  string
+	books []Book
+}
+
+type Library struct {
+	books   []Book
+	members []Member
+}
+
+func checkOut(book *Book, member *Member) {
+	book.checkoutTime = time.Now().Format("15:04")
+	member.books = append(member.books, *book)
+}
+
+func checkIn(book *Book, member *Member) {
+	book.returnTime = time.Now().Format("3:04")
+	member.books = member.books[1:]
+}
+
+func printLibrary(library Library) {
+	fmt.Println("Books:")
+	for _, book := range library.books {
+		fmt.Println(book.name, book.checkoutTime, book.returnTime)
+	}
+	fmt.Println("Members:")
+	for _, member := range library.members {
+		fmt.Println(member.name, member.books)
+	}
+	fmt.Println()
+}
+
+func main() {
+	library := Library{
+		books: []Book{
+			{name: "Book 1"},
+			{name: "Book 2"},
+			{name: "Book 3"},
+			{name: "Book 4"},
+		},
+		members: []Member{
+			{name: "Member 1", books: []Book{}},
+			{name: "Member 2", books: []Book{}},
+			{name: "Member 3", books: []Book{}},
+		},
+	}
+
+	printLibrary(library)
+
+	checkOut(&library.books[0], &library.members[0])
+
+	printLibrary(library)
+
+	checkIn(&library.books[0], &library.members[0])
+
+	printLibrary(library)
+
+}

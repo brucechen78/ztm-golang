@@ -12,7 +12,27 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
+	now := time.Now()
+	fmt.Println(now)
+	for i := 1; i <= 50; i++ {
+		if i%15 == 0 {
+			fmt.Println("FizzBuzz")
+			continue
+		}
+		if i%5 == 0 {
+			fmt.Println("Buzz")
+			continue
+		}
+		if i%3 == 0 {
+			fmt.Println("Fizz")
+			continue
+		}
+		fmt.Println(i)
+	}
 }

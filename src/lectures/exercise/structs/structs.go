@@ -19,6 +19,32 @@ package main
 
 import "fmt"
 
+type Rectangle struct {
+	Length int
+	Width  int
+}
+
+func area(r Rectangle) int {
+	return r.Length * r.Width
+}
+
+func perimeter(r Rectangle) int {
+	return 2*r.Length + 2*r.Width
+}
+
 func main() {
+
+	rectangle := Rectangle{Length: 10, Width: 5}
+	fmt.Println("Rectangle:", rectangle)
+
+	fmt.Println("Area:", area(rectangle))
+	fmt.Println("Perimeter:", perimeter(rectangle))
+
+	rectangle.Length *= 2
+	rectangle.Width *= 2
+	fmt.Println("Rectangle:", rectangle)
+
+	fmt.Println("Area:", area(rectangle))
+	fmt.Println("Perimeter:", perimeter(rectangle))
 
 }

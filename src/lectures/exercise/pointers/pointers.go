@@ -18,6 +18,40 @@ package main
 
 import "fmt"
 
-func main() {
+type item struct {
+	name string
+	tag  bool
+}
 
+// func activateTag(item *item) {
+// 	item.tag = true
+// }
+
+func deactivateTag(item *item) {
+	item.tag = false
+}
+
+func checkout(items []item) {
+	for i := range items {
+		deactivateTag(&items[i])
+	}
+}
+
+func main() {
+	items := []item{
+		{name: "Milk", tag: true},
+		{name: "Bread", tag: true},
+		{name: "Eggs", tag: true},
+		{name: "Butter", tag: true},
+	}
+
+	fmt.Println("Before deactivation:", items)
+
+	deactivateTag(&items[0])
+
+	fmt.Println("After deactivation:", items)
+
+	checkout(items)
+
+	fmt.Println("After checkout:", items)
 }

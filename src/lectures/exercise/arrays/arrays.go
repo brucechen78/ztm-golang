@@ -19,5 +19,24 @@ package main
 import "fmt"
 
 func main() {
+	type product struct {
+		name  string
+		price float64
+	}
+	shoppingList := [4]product{}
+
+	shoppingList[0] = product{name: "Milk", price: 2.50}
+	shoppingList[1] = product{name: "Bread", price: 1.50}
+	shoppingList[2] = product{name: "Eggs", price: 3.50}
+
+	fmt.Println("Last item on the list:", shoppingList[2].name)
+	fmt.Println("Total number of items:", len(shoppingList))
+	fmt.Println("Total cost of the items:", shoppingList[0].price+shoppingList[1].price+shoppingList[2].price)
+
+	shoppingList[3] = product{name: "Butter", price: 2.00}
+
+	fmt.Println("Last item on the list:", shoppingList[3].name)
+	fmt.Println("Total number of items:", len(shoppingList))
+	fmt.Println("Total cost of the items:", shoppingList[0].price+shoppingList[1].price+shoppingList[2].price+shoppingList[3].price)
 
 }
